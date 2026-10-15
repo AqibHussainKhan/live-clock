@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Live Clock</title>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-900 via-red-800 to-amber-900">
+
+    <!-- Live Clock Card -->
+    <div class="w-[430px] rounded-[30px] bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-8 text-center">
+
+        <!-- Icon -->
+        <div class="w-[90px] h-[90px] mx-auto mb-6 rounded-full bg-gradient-to-r from-yellow-300 to-orange-500 flex items-center justify-center text-[45px] shadow-xl">
+            ⏰
+        </div>
+
+        <!-- Heading -->
+        <h1 class="text-white text-[32px] font-bold">
+            Live Clock
+        </h1>
+
+        <p class="text-gray-200 mt-2 mb-6">
+            Click the button to start the live digital clock.
+        </p>
+
+        <!-- Clock Display -->
+        <div class="bg-black/40 border border-orange-300/40 rounded-[20px] py-6 mb-7 shadow-inner">
+
+            <p id="clock"
+               class="text-[42px] font-extrabold tracking-[4px] text-yellow-300 font-mono">
+                00:00:00
+            </p>
+
+        </div>
+
+        <!-- Button -->
+        <button
+            onclick="startClock()"
+            class="w-full py-4 rounded-[18px] bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-[18px] font-bold shadow-lg hover:scale-105 hover:shadow-orange-500/50 duration-300 active:scale-95">
+
+            Start Clock
+
+        </button>
+
+    </div>
+
+    <script>
+        let timer;
+
+        function startClock() {
+
+            if (timer) return;
+
+            function updateClock() {
+
+                let now = new Date();
+
+                let hours = String(now.getHours()).padStart(2, "0");
+                let minutes = String(now.getMinutes()).padStart(2, "0");
+                let seconds = String(now.getSeconds()).padStart(2, "0");
+
+                document.getElementById("clock").innerHTML =
+                    `${hours}:${minutes}:${seconds}`;
+            }
+
+            updateClock();
+
+            timer = setInterval(updateClock, 1000);
+        }
+    </script>
+
+</body>
+</html>
